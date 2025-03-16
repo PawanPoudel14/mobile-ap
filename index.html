@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Broker Management System</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+        }
+        
+        header {
+            background: #333;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background: #444;
+        }
+        
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+        
+        .nav-links li {
+            padding: 10px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: white;
+        }
+        
+        .hamburger {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                background: #444;
+            }
+            .nav-links.show {
+                display: flex;
+            }
+            .hamburger {
+                display: block;
+            }
+        }
+        
+        section {
+            padding: 20px;
+        }
+        
+        .broker-list {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .broker {
+            background: white;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+        
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Broker Management</div>
+            <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+            <ul class="nav-links" id="navMenu">
+                <li><a href="#brokers">Brokers</a></li>
+                <li><a href="#market">Market Updates</a></li>
+                <li><a href="#currency">Currency Rates</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section id="brokers">
+        <h2>List of Broker Companies in Nepal</h2>
+        <div class="broker-list">
+            <div class="broker" onmouseover="highlight(this)" onmouseout="removeHighlight(this)">
+                <h3>Broker 1: ABC Securities</h3>
+                <p>Leading stock broker in Nepal with top-tier services.</p>
+            </div>
+            <div class="broker" onmouseover="highlight(this)" onmouseout="removeHighlight(this)">
+                <h3>Broker 2: XYZ Investments</h3>
+                <p>Trusted by thousands for secure and efficient trading.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section id="market">
+        <h2>Market Updates</h2>
+        <div class="market-data">
+            <h3>Top 10 Gainers</h3>
+            <ul id="gainers-list"></ul>
+            <h3>Top 10 Losers</h3>
+            <ul id="losers-list"></ul>
+        </div>
+    </section>
+    
+    <section id="currency">
+        <h2>Currency Exchange Rates</h2>
+        <label for="currency-select">Select Currency:</label>
+        <select id="currency-select" onchange="updateExchangeRate()">
+            <option value="usd">USD</option>
+            <option value="eur">EUR</option>
+            <option value="gbp">GBP</option>
+        </select>
+        <p id="exchange-rate">Exchange rate: N/A</p>
+    </section>
+    
+    <footer id="contact">
+        <p>&copy; 2025 Broker Management System</p>
+        <p>Owner: John Doe | Contact: +977-9800000000 | Location: Kathmandu, Nepal</p>
+    </footer>
+    
+    <script>
+        function toggleMenu() {
+            document.getElementById("navMenu").classList.toggle("show");
+        }
+        
+        function highlight(element) {
+            element.style.background = "#ddd";
+        }
+        
+        function removeHighlight(element) {
+            element.style.background = "white";
+        }
+        
+        function updateExchangeRate() {
+            let rates = { usd: "132.50 NPR", eur: "144.80 NPR", gbp: "168.90 NPR" };
+            let selected = document.getElementById("currency-select").value;
+            document.getElementById("exchange-rate").innerText = "Exchange rate: " + rates[selected];
+        }
+    </script>
+</body>
+</html>
