@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Contact Form</title>
+</head>
+<body>
+  <h2>Contact Form</h2>
+  <form id="contactForm">
+    <input type="text" id="name" placeholder="Your Name" required><br><br>
+    <input type="email" id="email" placeholder="Your Email" required><br><br>
+    <button type="submit">Submit</button>
+  </form>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database-compat.js"></script>
+
+  <script>
+    
+    const firebaseConfig = {
+  apiKey: "AIzaSyB0tX_0kyEcrHxMDEUBQs3Xzj8dwfd-o-g",
+  authDomain: "pawanfirst-project.firebaseapp.com",
+  databaseURL: "https://pawanfirst-project-default-rtdb.firebaseio.com",
+  projectId: "pawanfirst-project",
+  storageBucket: "pawanfirst-project.firebasestorage.app",
+  messagingSenderId: "468599628816",
+  appId: "1:468599628816:web:c2aebd1a8baac6d0f3d695",
+  measurementId: "G-1JJYJPT2SE"
+};
+
+
+    // Step 2: Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
+
+    // Step 3: Form submission handler
+    const contactForm = document.getElementById('contactForm');
+
+    contactForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+
+      // Step 4: Save to Firebase
+      database.ref('contacts').push({
+        name: name,
+        email: email
+      });
+
+      alert("Data submitted!");
+      contactForm.reset();
+    });
+  </script>
+</body>
+</html>
